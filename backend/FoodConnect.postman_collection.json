@@ -1,0 +1,363 @@
+{
+  "info": {
+    "name": "FoodConnect API",
+    "_postman_id": "foodconnect-api-v1",
+    "description": "Comprehensive REST API Collection for FoodConnect - Food Donation and Distribution Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "donorToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "ngoToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "volunteerToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Register Donor",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Golden Harvest Bakery\",\n  \"email\": \"donor@foodconnect.org\",\n  \"password\": \"password123\",\n  \"phone\": \"+1-555-0101\",\n  \"role\": \"ROLE_DONOR\",\n  \"address\": \"124 Market Street, Downtown\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register"] }
+          }
+        },
+        {
+          "name": "Register NGO",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"City Food Relief NGO\",\n  \"email\": \"ngo@foodconnect.org\",\n  \"password\": \"password123\",\n  \"phone\": \"+1-555-0202\",\n  \"role\": \"ROLE_NGO\",\n  \"address\": \"45 Community Center, Metro City\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register"] }
+          }
+        },
+        {
+          "name": "Register Volunteer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Alex Rivera (Volunteer)\",\n  \"email\": \"volunteer@foodconnect.org\",\n  \"password\": \"password123\",\n  \"phone\": \"+1-555-0303\",\n  \"role\": \"ROLE_VOLUNTEER\",\n  \"address\": \"78 Oak Avenue, North District\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register"] }
+          }
+        },
+        {
+          "name": "Login Donor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set('donorToken', jsonData.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"donor@foodconnect.org\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        },
+        {
+          "name": "Login NGO",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set('ngoToken', jsonData.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ngo@foodconnect.org\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        },
+        {
+          "name": "Login Volunteer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set('volunteerToken', jsonData.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"volunteer@foodconnect.org\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        },
+        {
+          "name": "Get Current User Profile (/me)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{donorToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/me", "host": ["{{baseUrl}}"], "path": ["api", "auth", "me"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Food Donations",
+      "item": [
+        {
+          "name": "Create Food Donation (Donor)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{donorToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Hot Vegetarian Meals Tray\",\n  \"description\": \"Freshly prepared steamed rice, dal, and mixed vegetable curry in food-grade sealed trays.\",\n  \"category\": \"Cooked Meals\",\n  \"quantity\": \"25 kg\",\n  \"servings\": 60,\n  \"pickupAddress\": \"124 Market Street, Downtown\",\n  \"preparedAt\": \"2026-10-10T11:00:00\",\n  \"expiresAt\": \"2026-10-10T18:00:00\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/donations", "host": ["{{baseUrl}}"], "path": ["api", "donations"] }
+          }
+        },
+        {
+          "name": "Browse Available Food Donations",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/donations?availableOnly=true", "host": ["{{baseUrl}}"], "path": ["api", "donations"], "query": [{ "key": "availableOnly", "value": "true" }] }
+          }
+        },
+        {
+          "name": "Filter Food Donations by Category",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/donations?category=Cooked Meals", "host": ["{{baseUrl}}"], "path": ["api", "donations"], "query": [{ "key": "category", "value": "Cooked Meals" }] }
+          }
+        },
+        {
+          "name": "Get Donation By ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/donations/1", "host": ["{{baseUrl}}"], "path": ["api", "donations", "1"] }
+          }
+        },
+        {
+          "name": "Get My Donations (Donor)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{donorToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/donations/my", "host": ["{{baseUrl}}"], "path": ["api", "donations", "my"] }
+          }
+        },
+        {
+          "name": "Update Donation Details (Donor)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{donorToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Hot Vegetarian Meals Tray (Updated)\",\n  \"description\": \"Additional portions added.\",\n  \"category\": \"Cooked Meals\",\n  \"quantity\": \"30 kg\",\n  \"servings\": 75,\n  \"pickupAddress\": \"124 Market Street, Downtown\",\n  \"preparedAt\": \"2026-10-10T11:00:00\",\n  \"expiresAt\": \"2026-10-10T19:00:00\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/donations/1", "host": ["{{baseUrl}}"], "path": ["api", "donations", "1"] }
+          }
+        },
+        {
+          "name": "Cancel Donation (Donor)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{donorToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"CANCELLED\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/donations/1/status", "host": ["{{baseUrl}}"], "path": ["api", "donations", "1", "status"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Donation Requests",
+      "item": [
+        {
+          "name": "Submit Donation Request (NGO)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{ngoToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"donationId\": 1,\n  \"message\": \"We have 60 community members ready to receive this meal at our shelter.\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/donation-requests", "host": ["{{baseUrl}}"], "path": ["api", "donation-requests"] }
+          }
+        },
+        {
+          "name": "Get My Requests (NGO)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{ngoToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/donation-requests/my", "host": ["{{baseUrl}}"], "path": ["api", "donation-requests", "my"] }
+          }
+        },
+        {
+          "name": "Get Received Requests (Donor)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{donorToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/donation-requests/received", "host": ["{{baseUrl}}"], "path": ["api", "donation-requests", "received"] }
+          }
+        },
+        {
+          "name": "Approve Request (Donor)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{donorToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"APPROVED\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/donation-requests/1/status", "host": ["{{baseUrl}}"], "path": ["api", "donation-requests", "1", "status"] }
+          }
+        },
+        {
+          "name": "Reject Request (Donor)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{donorToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"REJECTED\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/donation-requests/1/status", "host": ["{{baseUrl}}"], "path": ["api", "donation-requests", "1", "status"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Delivery Management",
+      "item": [
+        {
+          "name": "Get Available Deliveries (Volunteer)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{volunteerToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/deliveries/available", "host": ["{{baseUrl}}"], "path": ["api", "deliveries", "available"] }
+          }
+        },
+        {
+          "name": "Accept Delivery Assignment (Volunteer)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{volunteerToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/deliveries/1/accept", "host": ["{{baseUrl}}"], "path": ["api", "deliveries", "1", "accept"] }
+          }
+        },
+        {
+          "name": "Get My Deliveries (Volunteer)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{volunteerToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/deliveries/my", "host": ["{{baseUrl}}"], "path": ["api", "deliveries", "my"] }
+          }
+        },
+        {
+          "name": "Update Status to PICKED_UP (Volunteer)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{volunteerToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"PICKED_UP\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/deliveries/1/status", "host": ["{{baseUrl}}"], "path": ["api", "deliveries", "1", "status"] }
+          }
+        },
+        {
+          "name": "Update Status to DELIVERED (Volunteer)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{volunteerToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"DELIVERED\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/deliveries/1/status", "host": ["{{baseUrl}}"], "path": ["api", "deliveries", "1", "status"] }
+          }
+        }
+      ]
+    }
+  ]
+}
