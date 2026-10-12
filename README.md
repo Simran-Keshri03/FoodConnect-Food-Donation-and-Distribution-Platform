@@ -1,6 +1,7 @@
 # FoodConnect – Food Donation and Distribution Platform
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20Login%20Page-4f46e5?style=flat&logo=rocket)](https://your-foodconnect-app.vercel.app/login)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20Login%20Page-4f46e5?style=for-the-badge&logo=vercel)](https://food-connect-food-donation-and-dist.vercel.app/login)
+[![Backend API](https://img.shields.io/badge/Backend%20API-Render-black?style=for-the-badge&logo=render)](https://foodconnect-food-donation-and.onrender.com)
 [![Java](https://img.shields.io/badge/Java-17%2B-orange.svg)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.4-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Security](https://img.shields.io/badge/Spring%20Security-JWT-blue.svg)](https://spring.io/projects/spring-security)
@@ -14,9 +15,11 @@ FoodConnect is an end-to-end full-stack web application designed to eliminate fo
 
 ## 🚀 Live Project & Direct Login
 
-👉 **Click here to directly open the project login page**: **[Launch FoodConnect Login](https://your-foodconnect-app.vercel.app/login)**
+👉 **Click here to directly open the project login page**: **[Launch FoodConnect Login](https://food-connect-food-donation-and-dist.vercel.app/login)**
 
-*(Local development link: [http://localhost:5173/login](http://localhost:5173/login))*
+- 🌐 **Live Web Application (Login)**: [https://food-connect-food-donation-and-dist.vercel.app/login](https://food-connect-food-donation-and-dist.vercel.app/login)
+- ⚙️ **Live Backend API**: [https://foodconnect-food-donation-and.onrender.com](https://foodconnect-food-donation-and.onrender.com)
+- 💻 **Local Development**: [http://localhost:5173/login](http://localhost:5173/login)
 
 > 💡 **Quick Login Tip**: Pre-seeded demo accounts for Donors, NGOs, and Volunteers with one-click autofill are listed below in [Section 7: Demo Credentials](#7-demo-credentials).
 
