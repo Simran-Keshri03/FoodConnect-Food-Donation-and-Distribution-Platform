@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let rawBaseURL = import.meta.env.VITE_API_BASE_URL || '/api';
+let rawBaseURL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? 'https://foodconnect-food-donation-and.onrender.com/api' : '/api');
 if (rawBaseURL.startsWith('http')) {
   rawBaseURL = rawBaseURL.replace(/\/+$/, '');
   if (!rawBaseURL.endsWith('/api')) {
