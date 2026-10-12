@@ -1,6 +1,6 @@
 # FoodConnect – Food Donation and Distribution Platform
 
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717.svg?logo=github)](https://github.com/Simran-Keshri03/FoodConnect-Food-Donation-and-Distribution-Platform)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20Login%20Page-4f46e5?style=flat&logo=rocket)](https://your-foodconnect-app.vercel.app/login)
 [![Java](https://img.shields.io/badge/Java-17%2B-orange.svg)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.4-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Security](https://img.shields.io/badge/Spring%20Security-JWT-blue.svg)](https://spring.io/projects/spring-security)
@@ -12,13 +12,17 @@ FoodConnect is an end-to-end full-stack web application designed to eliminate fo
 
 ---
 
-## 📌 Repository & Quick Links
+## 🚀 Live Project & Direct Login
 
-- **GitHub Repository**: [https://github.com/Simran-Keshri03/FoodConnect-Food-Donation-and-Distribution-Platform](https://github.com/Simran-Keshri03/FoodConnect-Food-Donation-and-Distribution-Platform)
-- **Author Profile**: [@Simran-Keshri03](https://github.com/Simran-Keshri03)
-- **Issues & Feedback**: [GitHub Issues](https://github.com/Simran-Keshri03/FoodConnect-Food-Donation-and-Distribution-Platform/issues)
+👉 **Click here to directly open the project login page**: **[Launch FoodConnect Login](https://your-foodconnect-app.vercel.app/login)**
 
-### Table of Contents
+*(Local development link: [http://localhost:5173/login](http://localhost:5173/login))*
+
+> 💡 **Quick Login Tip**: Pre-seeded demo accounts for Donors, NGOs, and Volunteers with one-click autofill are listed below in [Section 7: Demo Credentials](#7-demo-credentials).
+
+---
+
+## 📌 Table of Contents
 - [1. System Architecture & Lifecycle](#1-system-architecture--lifecycle)
 - [2. Technology Stack](#2-technology-stack)
 - [3. Project Structure](#3-project-structure)
@@ -28,7 +32,6 @@ FoodConnect is an end-to-end full-stack web application designed to eliminate fo
 - [7. Demo Credentials](#7-demo-credentials)
 - [8. Automated Testing](#8-automated-testing)
 - [9. Technical Interview & B.Tech Resume Highlights](#9-technical-interview--btech-resume-highlights)
-- [10. Repository & Author](#10-repository--author)
 
 ---
 
@@ -301,11 +304,3 @@ Key architectural concepts to highlight during technical interviews:
 
 4. **Centralized Error Handling**:
    - Implemented `@RestControllerAdvice` (`GlobalExceptionHandler`) to provide consistent REST error envelopes with HTTP status codes (400, 401, 403, 404, 409).
-
----
-
-## 10. Repository & Author
-
-- **GitHub Repository**: [https://github.com/Simran-Keshri03/FoodConnect-Food-Donation-and-Distribution-Platform](https://github.com/Simran-Keshri03/FoodConnect-Food-Donation-and-Distribution-Platform)
-- **Clone URL**: `https://github.com/Simran-Keshri03/FoodConnect-Food-Donation-and-Distribution-Platform.git`
-- **GitHub Profile**: [@Simran-Keshri03](https://github.com/Simran-Keshri03)
