@@ -22,6 +22,8 @@ FoodConnect is an end-to-end full-stack web application designed to eliminate fo
 - 💻 **Local Development**: [http://localhost:5173/login](http://localhost:5173/login)
 
 > 💡 **Quick Login Tip**: Pre-seeded demo accounts for Donors, NGOs, and Volunteers with one-click autofill are listed below in [Section 7: Demo Credentials](#7-demo-credentials).
+>
+> ⚡ **Cloud Availability**: The backend is kept warm 24/7 via an automated GitHub Actions Keep-Alive workflow (`.github/workflows/keep-alive.yml`). The web app also features proactive pre-warming, connection retry resilience, and a real-time backend readiness indicator.
 
 ---
 

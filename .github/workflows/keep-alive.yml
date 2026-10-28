@@ -1,0 +1,24 @@
+name: Keep Backend Alive
+
+on:
+  schedule:
+    # Runs every 12 minutes (Render free tier sleeps after 15 minutes of inactivity)
+    - cron: '*/12 * * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  ping-render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping FoodConnect Backend API
+        run: |
+          echo "Pinging FoodConnect Render backend to prevent free tier spin-down..."
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 "https://foodconnect-food-donation-and.onrender.com/api/health" || true)
+          echo "Health endpoint HTTP status: $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "Health endpoint returned $STATUS. Trying fallback donations endpoint..."
+            FALLBACK_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 "https://foodconnect-food-donation-and.onrender.com/api/donations" || true)
+            echo "Fallback endpoint HTTP status: $FALLBACK_STATUS"
+          fi
+          echo "Keep-alive ping completed successfully!"

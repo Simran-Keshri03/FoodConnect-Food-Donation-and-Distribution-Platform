@@ -1,16 +1,36 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { authApi } from '../api/client';
+import { authApi, warmUpServer } from '../api/client';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem('user');
-    return savedUser ? JSON.parse(savedUser) : null;
+    try {
+      return savedUser ? JSON.parse(savedUser) : null;
+    } catch {
+      return null;
+    }
   });
   const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
+  const [backendStatus, setBackendStatus] = useState('checking'); // 'checking' | 'online' | 'waking'
 
+  // Proactively warm up backend upon app mount
+  useEffect(() => {
+    let isMounted = true;
+    warmUpServer().then((isOnline) => {
+      if (isMounted) {
+        setBackendStatus(isOnline ? 'online' : 'waking');
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Verify session when token exists
   useEffect(() => {
     const verifyUser = async () => {
       if (token) {
@@ -19,10 +39,14 @@ export const AuthProvider = ({ children }) => {
           if (res?.data) {
             setUser(res.data);
             localStorage.setItem('user', JSON.stringify(res.data));
+            setBackendStatus('online');
           }
         } catch (err) {
-          console.warn('Session verification failed, logging out', err);
-          logout();
+          console.warn('Session verification warning:', err.message);
+          // Only log out if credentials are truly invalidated (401), NOT on network timeout/spin-up
+          if (err.message?.toLowerCase().includes('unauthorized') || err.message?.toLowerCase().includes('invalid token')) {
+            logout();
+          }
         }
       }
       setLoading(false);
@@ -42,6 +66,7 @@ export const AuthProvider = ({ children }) => {
       role: authData.role,
     };
     setUser(userInfo);
+    setBackendStatus('online');
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', JSON.stringify(userInfo));
     return userInfo;
@@ -58,6 +83,7 @@ export const AuthProvider = ({ children }) => {
       role: authData.role,
     };
     setUser(userInfo);
+    setBackendStatus('online');
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', JSON.stringify(userInfo));
     return userInfo;
@@ -81,6 +107,7 @@ export const AuthProvider = ({ children }) => {
         token,
         isAuthenticated: !!token,
         loading,
+        backendStatus,
         login,
         register,
         logout,
